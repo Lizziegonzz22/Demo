@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Página Demo — Espacio de Apuntes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Fondos orgánicos abstractos detrás de la interfaz -->
+<div class="blob shape-1"></div>
+<div class="blob shape-2"></div>
+
+<div class="glass-card">
+
+    <!-- PANTALLA 1: BIENVENIDA -->
+    <div id="screen-welcome" class="screen active">
+        <div class="brand-header">
+            <span class="logo-badge">Página Demo</span>
+            <h1>¡BIENVENID@!</h1>
+        </div>
+        <p class="subtitle">Podés elegir cualquiera de las 3 opciones para comenzar.</p>
+        
+        <div class="interactive-grid">
+            <button class="pill-btn btn-student" data-target="screen-student">
+                <span class="icon">👨‍🎓</span> Soy estudiante
+            </button>
+            <button class="pill-btn btn-teacher" data-target="screen-teacher-menu">
+                <span class="icon">👩‍🏫</span> Soy profesor
+            </button>
+            <button class="pill-btn btn-guest" data-target="screen-guest-view">
+                <span class="icon">👤</span> Ingresar como invitado
+            </button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 2: OPCIONES DE ESTUDIANTE -->
+    <div id="screen-student" class="screen">
+        <button class="nav-back" data-target="screen-welcome">← Volver al inicio</button>
+        <h2>Opciones de Estudiante</h2>
+        
+        <div class="interactive-grid">
+            <button class="action-card color-blue" data-target="screen-student-dashboard">
+                <h3>Ingreso instantáneo</h3>
+                <p>Ingresar con el código de tu grupo de clase.</p>
+            </button>
+            <button class="action-card color-green" id="btn-create-group">
+                <h3>Crear grupo</h3>
+                <p>Genera un código único para compartir con tu clase.</p>
+            </button>
+        </div>
+
+        <div class="floating-note">
+            📌 <strong>Nota:</strong> Esta instancia es para tener un lugar en el cual únicamente se compartan apuntes sin que se pierdan en la charla, como pasa en el grupo de WhatsApp.
+        </div>
+    </div>
+
+    <!-- PANTALLA 3: DASHBOARD ESTUDIANTE -->
+    <div id="screen-student-dashboard" class="screen">
+        <button class="nav-back" data-target="screen-student">← Volver</button>
+        <h2>Panel de Estudiante</h2>
+        
+        <div class="interactive-grid">
+            <button class="pill-btn color-blue" id="btn-student-doubts">
+                <span class="icon">❓</span> Tengo dudas
+            </button>
+            <button class="pill-btn color-green" id="btn-upload-notes">
+                <span class="icon">📤</span> Quiero subir apuntes
+            </button>
+            <button class="pill-btn color-orange" data-target="screen-search-notes">
+                <span class="icon">🔍</span> Quiero ver apuntes
+            </button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 4: BUSCADOR DE APUNTES CON FILTROS -->
+    <div id="screen-search-notes" class="screen">
+        <button class="nav-back" data-target="screen-student-dashboard">← Volver al panel</button>
+        <h2>Buscar Apuntes</h2>
+        
+        <div class="search-bar-fluid">
+            <input type="text" placeholder="¿Qué materia buscas hoy? Ej: Matemática...">
+            <button class="search-circle-btn" id="btn-search-materia">➔</button>
+        </div>
+
+        <h3 class="section-title">Filtros de visualización</h3>
+        <div class="filter-wrapper">
+            <button class="filter-pill" id="btn-filter-all">Ver todos los contenidos (Cualquier liceo)</button>
+            <button class="filter-pill" id="btn-filter-group">Ver únicamente los de mi grupo</button>
+        </div>
+
+        <div class="floating-note badge-moneditas">
+            💰 Al interactuar en el buscador ganarás <strong>"moneditas"</strong> que te permitirán tener mayor acceso a la página.
+        </div>
+    </div>
+
+    <!-- PANTALLA 5: MENÚ PROFESOR -->
+    <div id="screen-teacher-menu" class="screen">
+        <button class="nav-back" data-target="screen-welcome">← Volver al inicio</button>
+        <h2>Panel de Profesores</h2>
+        
+        <div class="interactive-grid">
+            <button class="action-card color-blue" id="btn-teacher-doubts">
+                <h3>A) Responder dudas</h3>
+                <p>Ver dudas de estudiantes filtradas por tu materia.</p>
+            </button>
+            <button class="action-card color-green" data-target="screen-teacher-learn">
+                <h3>B) Nuevas formas de enseñar</h3>
+                <p>Explorar material pedagógico dinámico.</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 6: APRENDER FORMAS DE ENSEÑAR (PROFESORES) -->
+    <div id="screen-teacher-learn" class="screen">
+        <button class="nav-back" data-target="screen-teacher-menu">← Volver</button>
+        <h2>Formas de Enseñar</h2>
+        
+        <div class="floating-note text-info">
+            📂 <strong>Contenido didáctico:</strong> Archivos, videos y audios de otros profesores que implementan dinámicas más interactivas en el aprendizaje.
+        </div>
+
+        <div class="interactive-grid" style="margin-top: 25px;">
+            <button class="pill-btn color-orange" id="btn-upload-idea">
+                <span class="icon">💡</span> Compartir mi idea con otros profes
+            </button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 7: VISTA INVITADO -->
+    <div id="screen-guest-view" class="screen">
+        <button class="nav-back" data-target="screen-welcome">← Volver al inicio</button>
+        <h2>Acceso como Invitado</h2>
+        
+        <div class="floating-note">
+            👀 <strong>Modo Lectura:</strong> Podrás observar otros apuntes sin necesidad de tener grupo, ver archivos de distintos estudiantes y consultar dudas en caso de necesitarlo.
+        </div>
+
+        <div class="search-bar-fluid">
+            <input type="text" placeholder="Explorar materias de forma pública...">
+            <button class="search-circle-btn bg-warning" id="btn-search-guest">➔</button>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA COMÚN -->
+<div class="footer">
+    <span class="logo-badge">Página Demo</span>
+    <a href="https://demo.com" target="_blank" class="footer-link">www.demo.com</a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
