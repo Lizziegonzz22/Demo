@@ -1,0 +1,314 @@
+/* Paleta Cromática Orgánica y Vibrante */
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    /* Iluminaciones de acento para los botones flotantes */
+    --neon-blue: #38bdf8;
+    --neon-green: #4ade80;
+    --neon-orange: #fb923c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Formas orgánicas de fondo flotante */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    opacity: 0.25;
+    animation: floatAnimation 8s ease-in-out infinite alternate;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    background: #4f46e5;
+    top: 10%;
+    left: 15%;
+}
+
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    background: #06b6d4;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: -4s;
+}
+
+@keyframes floatAnimation {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(30px) scale(1.1); }
+}
+
+/* El Contenedor de Vidrio Esmerilado (Glassmorphism) */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 100%;
+    max-width: 520px;
+    padding: 40px 30px;
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    position: relative;
+}
+
+/* Animaciones de suavizado de pantallas */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    animation: smoothShow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes smoothShow {
+    from { opacity: 0; transform: scale(0.96) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Encabezados y Textos */
+.brand-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.logo-badge {
+    background: #fff;
+    color: #000;
+    font-weight: 900;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+}
+
+h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
+h2 { font-size: 1.6rem; margin-bottom: 25px; font-weight: 700; text-align: center; }
+
+.subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+/* Diseño Asimétrico e Interactivo de Botones */
+.interactive-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Botones Estilo "Píldora Flotante" */
+.pill-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    padding: 16px 24px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pill-btn .icon {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px;
+    border-radius: 12px;
+    transition: background 0.3s;
+}
+
+/* Modificadores de color sutiles y estéticos */
+.pill-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(255,255,255,0.1);
+}
+
+.btn-student:hover { border-color: var(--neon-blue); color: var(--neon-blue); }
+.btn-teacher:hover { border-color: var(--neon-green); color: var(--neon-green); }
+.btn-guest:hover { border-color: var(--neon-orange); color: var(--neon-orange); }
+
+.color-blue { border-left: 4px solid var(--neon-blue); }
+.color-green { border-left: 4px solid var(--neon-green); }
+.color-orange { border-left: 4px solid var(--neon-orange); }
+
+/* Tarjetas de Acción de tamaño variable */
+.action-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    border-radius: 24px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.action-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; text-align: left; }
+.action-card p { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+
+.action-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: scale(1.02);
+}
+
+/* Buscador Fluido Curvo */
+.search-bar-fluid {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 8px 8px 8px 20px;
+    border-radius: 50px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.search-bar-fluid input {
+    background: none;
+    border: none;
+    color: #fff;
+    flex: 1;
+    font-size: 15px;
+    outline: none;
+}
+
+.search-bar-fluid input::placeholder { color: #64748b; }
+
+.search-circle-btn {
+    background: var(--neon-blue);
+    color: #000;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.search-circle-btn:hover { transform: scale(1.1); }
+.bg-warning { background: var(--neon-orange); }
+
+/* Filtros Orgánicos en Cápsulas Libres */
+.section-title { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; text-align: left;}
+
+.filter-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.filter-pill:hover {
+    background: var(--text-primary);
+    color: #000;
+}
+
+/* Notas flotantes integradas (No bloques cuadrados) */
+.floating-note {
+    background: rgba(56, 189, 248, 0.06);
+    border: 1px dashed rgba(56, 189, 248, 0.3);
+    padding: 16px 20px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    color: #e0f2fe;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+.badge-moneditas {
+    background: rgba(74, 222, 128, 0.06);
+    border-color: rgba(74, 222, 128, 0.3);
+    color: #f0fdf4;
+}
+
+.text-info {
+    background: rgba(251, 146, 60, 0.06);
+    border-color: rgba(251, 146, 60, 0.3);
+    color: #fff7ed;
+}
+
+/* Navegación de Retorno Limpia */
+.nav-back {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 15px;
+    align-self: flex-start;
+    transition: color 0.2s;
+}
+
+.nav-back:hover { color: var(--neon-blue); }
+
+/* Footer Minimalista */
+.footer {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-link {
+    color: var(--text-muted);
+    font-size: 12px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+
+.footer-link:hover { color: #fff; }
