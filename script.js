@@ -60,4 +60,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-search-guest')?.addEventListener('click', () => {
         alert('Explorando contenidos públicos en modo lectura (Sin asignación de grupo).');
     });
+    // --- LÓGICA DEL CHAT INTERACTIVO ---
+    const chatInput = document.getElementById('chat-input');
+    const btnSendMessage = document.getElementById('btn-send-message');
+    const chatWindow = document.getElementById('chat-window');
+
+    function enviarMensaje() {
+        const texto = chatInput.value.trim();
+        if (texto === '') return; // No enviar si está vacío
+
+        // Crear elemento de mensaje estructurado
+        const nuevoMensaje = document.createElement('div');
+        nuevoMensaje.className = 'chat-msg user-own';
+        nuevoMensaje.innerHTML = `
+            <span class="chat-user">Usuario (Tú)</span>
+            <p class="chat-text">${texto}</p>
+        `;
+
+        // Acoplar a la ventana y hacer scroll automático al final
+        chatWindow.appendChild(nuevoMensaje);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        // Limpiar cuadro de texto
+        chatInput.value = '';
+    }
+
+    // Escuchar el clic en la flecha de enviar
+    btnSendMessage?.addEventListener('click', enviarMensaje);
+
+    // Permitir enviar el mensaje también presionando la tecla "Enter"
+    chatInput?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            enviarMensaje();
+        }
+    });
 });
