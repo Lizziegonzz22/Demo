@@ -94,80 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
             enviarMensaje();
         }
     });
-        // --- LÓGICA DEL ESCÁNER INTELIGENTE (OCR) ---
-    
-    // Insertar dinámicamente la librería externa Tesseract.js de forma segura
-    const scriptOcr = document.createElement('script');
-    scriptOcr.src = 'https://jsdelivr.net';
-    document.head.appendChild(scriptOcr);
-
-    // Esperamos a que el script se cargue por completo antes de asignar las funciones
-    scriptOcr.onload = () => {
-        const scannerUpload = document.getElementById('scanner-upload');
-        const uploadStatus = document.getElementById('upload-status');
-        const progressContainer = document.getElementById('scanner-progress-container');
-        const progressFill = document.getElementById('scanner-progress-fill');
-        const progressText = document.getElementById('scanner-progress-text');
-        const scannerPreview = document.getElementById('scanner-preview');
-        const resultContainer = document.getElementById('scanner-result-container');
-        const resultText = document.getElementById('scanner-result-text');
-        const btnCopyClean = document.getElementById('btn-copy-clean');
-
-        scannerUpload?.addEventListener('change', function(e) {
-            const file = e.target.files[0]; // Corrección para capturar el archivo individual del celular
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                if (scannerPreview) {
-                    scannerPreview.src = event.target.result;
-                    scannerPreview.style.display = 'block';
-                }
-                procesarImagenConOcr(event.target.result);
-            };
-            reader.readAsDataURL(file);
-            
-            if (uploadStatus) uploadStatus.innerText = "¡Imagen cargada con éxito!";
-        });
-
-        function procesarImagenConOcr(imageSrc) {
-            if (progressContainer) progressContainer.style.display = 'block';
-            if (resultContainer) resultContainer.style.display = 'none';
-            if (progressFill) progressFill.style.width = '0%';
-            if (progressText) progressText.innerText = "Inicializando IA... 0%";
-
-            Tesseract.recognize(imageSrc, 'spa', {
-                logger: m => {
-                    if (m.status === 'recognizing text' && progressFill && progressText) {
-                        const porcentaje = Math.round(m.progress * 100);
-                        progressFill.style.width = porcentaje + '%';
-                        progressText.innerText = `Pasando a limpio... ${porcentaje}%`;
-                    }
-                }
-            }).then(({ data: { text } }) => {
-                if (progressContainer) progressContainer.style.display = 'none';
-                if (resultContainer) resultContainer.style.display = 'block';
-                
-                if (resultText) {
-                    if (text.trim() === '') {
-                        resultText.value = "[Ejemplo de Demo]: No se detectó texto claro en la imagen. Intenta con una foto más nítida, o prueba subiendo cualquier imagen de texto impreso.";
-                    } else {
-                        resultText.value = text;
-                    }
-                }
-            }).catch(err => {
-                console.error(err);
-                if (progressContainer) progressContainer.style.display = 'none';
-                alert('Hubo un pequeño inconveniente al procesar el escaneo en este dispositivo.');
-            });
-        }
-
-        btnCopyClean?.addEventListener('click', () => {
-            if (resultText) {
-                resultText.select();
-                navigator.clipboard.writeText(resultText.value);
-                alert('¡Texto limpio copiado al portapapeles con éxito!');
-            }
-        });
-    };
+        // --- SIMULACIÓN DEL ESCÁNER INTELIGENTE ---
+    document.getElementById('btn-simulate-scan')?.addEventListener('click', () => {
+        alert('Simulación de carga de archivo:\n[Demo] Aquí se abriría la cámara de tu celular para fotografiar tu cuaderno y el sistema pasaría el texto a limpio automáticamente.');
+    });
 });
