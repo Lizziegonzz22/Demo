@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus — Espacio de Apuntes</title>
+    <title>Plataforma Nexus — Espacio de Apuntes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- Fondos orgánicos abstractos detrás de la interfaz -->
 <div class="blob shape-1"></div>
 <div class="blob shape-2"></div>
 
@@ -34,7 +33,7 @@
             </button>
             <button class="pill-btn color-orange" data-target="screen-profile">
                 <span class="icon">👤</span> Mi Perfil
-            </button> 
+            </button>
         </div>
     </div>
 
@@ -151,35 +150,34 @@
             <button class="search-circle-btn bg-warning" id="btn-search-guest">➔</button>
         </div>
     </div>
-        <!-- NUEVA PANTALLA: CHAT INTERACTIVO -->
+
+    <!-- PANTALLA 8: CHAT INTERACTIVO -->
     <div id="screen-chat" class="screen">
         <button class="nav-back" data-target="screen-student-dashboard">← Volver al panel</button>
         <h2>Chat del Grupo</h2>
         
-        <!-- Contenedor de mensajes simulados -->
         <div class="chat-window" id="chat-window">
             <div class="chat-msg">
-                <span class="chat-user">Usuario1</span>
+                <span class="chat-user">Usuario 1</span>
                 <p class="chat-text">¿Alguien tiene los ejercicios de Matemática para mañana? No entendí el punto 3 😭</p>
             </div>
             <div class="chat-msg">
-                <span class="chat-user">Usuario2</span>
+                <span class="chat-user">Usuario 2</span>
                 <p class="chat-text">¡Yo los tengo! Acabo de subir el apunte escaneado al panel. Fijate si te sirve.</p>
             </div>
             <div class="chat-msg">
-                <span class="chat-user">Usuario3</span>
+                <span class="chat-user">Usuario 3</span>
                 <p class="chat-text">¡Buenísimo! Ya te dejé un corazón en el apunte. ¡Te ganaste moneditas hoy!</p>
             </div>
         </div>
 
-        <!-- Entrada de texto interactiva -->
         <div class="search-bar-fluid style-chat">
             <input type="text" id="chat-input" placeholder="Escribe un mensaje al grupo...">
             <button class="search-circle-btn" id="btn-send-message">➔</button>
         </div>
     </div>
 
-    <!-- PERFIL DE USUARIO -->
+    <!-- PANTALLA 9: PERFIL DE USUARIO -->
     <div id="screen-profile" class="screen">
         <button class="nav-back" data-target="screen-welcome">← Volver al inicio</button>
         <h2>Mi Perfil</h2>
@@ -190,7 +188,6 @@
             <p class="profile-role">Estudiante Activo</p>
         </div>
 
-        <!-- Sección de Economía y Logros Virtuales -->
         <div class="stats-row">
             <div class="stat-box">
                 <span class="stat-icon">🪙</span>
@@ -214,23 +211,18 @@
                 <span class="medal-name">Constante</span>
             </div>
         </div>
-        
-            <!-- PANTALLA: ESCÁNER DE APUNTES (MÓDULO DEMO) -->
+    </div>
+
+    <!-- PANTALLA 10: ESCÁNER DE APUNTES (MÓDULO DEMO SIMULADO) -->
     <div id="screen-scanner" class="screen">
         <button class="nav-back" data-target="screen-student-dashboard">← Volver al panel</button>
         <h2>Escáner Inteligente</h2>
         <p class="subtitle">Sube una foto de tus apuntes en papel para pasarlos a texto limpio digital.</p>
         
         <div class="scanner-container">
-            <!-- Al hacer clic en este recuadro, saltará la alerta simulada -->
             <div class="upload-box-fluid" id="btn-simulate-scan" style="cursor: pointer;">
                 <span class="upload-icon">📄</span>
                 <span class="upload-text">Seleccionar foto de la hoja</span>
-            </div>
-        </div>
-
-        <div class="floating-note badge-moneditas">
-            💡 **Nota de la Demo:** Esta es una ejemplificación visual. En la versión completa, el sistema procesará la imagen mediante IA para digitalizar tu letra.
         </div>
     </div>
 
