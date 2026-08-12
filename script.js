@@ -96,82 +96,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
         // --- LÓGICA DEL ESCÁNER INTELIGENTE (OCR) ---
     
-    // Insertar dinámicamente la librería externa Tesseract.js en la página
+    // Insertar dinámicamente la librería externa Tesseract.js de forma segura
     const scriptOcr = document.createElement('script');
     scriptOcr.src = 'https://jsdelivr.net';
     document.head.appendChild(scriptOcr);
 
-    const scannerUpload = document.getElementById('scanner-upload');
-    const uploadStatus = document.getElementById('upload-status');
-    const progressContainer = document.getElementById('scanner-progress-container');
-    const progressFill = document.getElementById('scanner-progress-fill');
-    const progressText = document.getElementById('scanner-progress-text');
-    const scannerPreview = document.getElementById('scanner-preview');
-    const resultContainer = document.getElementById('scanner-result-container');
-    const resultText = document.getElementById('scanner-result-text');
-    const btnCopyClean = document.getElementById('btn-copy-clean');
+    // Esperamos a que el script se cargue por completo antes de asignar las funciones
+    scriptOcr.onload = () => {
+        const scannerUpload = document.getElementById('scanner-upload');
+        const uploadStatus = document.getElementById('upload-status');
+        const progressContainer = document.getElementById('scanner-progress-container');
+        const progressFill = document.getElementById('scanner-progress-fill');
+        const progressText = document.getElementById('scanner-progress-text');
+        const scannerPreview = document.getElementById('scanner-preview');
+        const resultContainer = document.getElementById('scanner-result-container');
+        const resultText = document.getElementById('scanner-result-text');
+        const btnCopyClean = document.getElementById('btn-copy-clean');
 
-    scannerUpload?.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
+        scannerUpload?.addEventListener('change', function(e) {
+            const file = e.target.files[0]; // Corrección para capturar el archivo individual del celular
+            if (!file) return;
 
-        // 1. Mostrar vista previa de la imagen seleccionada
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            scannerPreview.src = event.target.result;
-            scannerPreview.style.display = 'block';
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                if (scannerPreview) {
+                    scannerPreview.src = event.target.result;
+                    scannerPreview.style.display = 'block';
+                }
+                procesarImagenConOcr(event.target.result);
+            };
+            reader.readAsDataURL(file);
             
-            // Iniciar el proceso de reconocimiento de texto (OCR)
-            procesarImagenConOcr(event.target.result);
-        };
-        reader.readAsDataURL(file);
-        
-        uploadStatus.innerText = "¡Imagen cargada con éxito!";
-    });
+            if (uploadStatus) uploadStatus.innerText = "¡Imagen cargada con éxito!";
+        });
 
-    function procesarImagenConOcr(imageSrc) {
-        // Preparar la interfaz de carga
-        progressContainer.style.display = 'block';
-        resultContainer.style.display = 'none';
-        progressFill.style.style = '0%';
-        progressText.innerText = "Inicializando motor de IA... 0%";
+        function procesarImagenConOcr(imageSrc) {
+            if (progressContainer) progressContainer.style.display = 'block';
+            if (resultContainer) resultContainer.style.display = 'none';
+            if (progressFill) progressFill.style.width = '0%';
+            if (progressText) progressText.innerText = "Inicializando IA... 0%";
 
-        // Ejecutar Tesseract en idioma Español ('spa')
-        Tesseract.recognize(
-            imageSrc,
-            'spa',
-            {
+            Tesseract.recognize(imageSrc, 'spa', {
                 logger: m => {
-                    // Actualizar la barra de progreso en pantalla según avanza el escaneo
-                    if (m.status === 'recognizing text') {
+                    if (m.status === 'recognizing text' && progressFill && progressText) {
                         const porcentaje = Math.round(m.progress * 100);
                         progressFill.style.width = porcentaje + '%';
                         progressText.innerText = `Pasando a limpio... ${porcentaje}%`;
                     }
                 }
-            }
-        ).then(({ data: { text } }) => {
-            // Escaneo finalizado con éxito
-            progressContainer.style.display = 'none';
-            resultContainer.style.display = 'block';
-            
-            // Si el motor no detecta letras, colocamos un mensaje por defecto para el demo
-            if (text.trim() === '') {
-                resultText.value = "[Ejemplo de Demo]: No se detectó texto claro en la imagen. Intenta con una foto más nítida, o prueba subiendo cualquier imagen de texto impreso.";
-            } else {
-                resultText.value = text;
-            }
-        }).catch(err => {
-            console.error(err);
-            progressContainer.style.display = 'none';
-            alert('Hubo un pequeño inconveniente al procesar el escaneo en este dispositivo.');
-        });
-    }
+            }).then(({ data: { text } }) => {
+                if (progressContainer) progressContainer.style.display = 'none';
+                if (resultContainer) resultContainer.style.display = 'block';
+                
+                if (resultText) {
+                    if (text.trim() === '') {
+                        resultText.value = "[Ejemplo de Demo]: No se detectó texto claro en la imagen. Intenta con una foto más nítida, o prueba subiendo cualquier imagen de texto impreso.";
+                    } else {
+                        resultText.value = text;
+                    }
+                }
+            }).catch(err => {
+                console.error(err);
+                if (progressContainer) progressContainer.style.display = 'none';
+                alert('Hubo un pequeño inconveniente al procesar el escaneo en este dispositivo.');
+            });
+        }
 
-    // Funcionalidad extra para copiar el texto copiado al portapapeles
-    btnCopyClean?.addEventListener('click', () => {
-        resultText.select();
-        navigator.clipboard.writeText(resultText.value);
-        alert('¡Texto limpio copiado al portapapeles con éxito!');
-    });
-});
+        btnCopyClean?.addEventListener('click', () => {
+            if (resultText) {
+                resultText.select();
+                navigator.clipboard.writeText(resultText.value);
+                alert('¡Texto limpio copiado al portapapeles con éxito!');
+            }
+        });
+    };
