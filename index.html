@@ -215,43 +215,25 @@
             </div>
         </div>
         
-        <!-- ESCÁNER DE APUNTES (OCR) -->
-        <div id="screen-scanner" class="screen">
-            <button class="nav-back" data-target="screen-student-dashboard">← Volver al panel</button>
-            <h2>Escáner Inteligente</h2>
-            <p class="subtitle">Sube una foto de tus apuntes en papel para pasarlos a texto limpio digital.</p>
+            <!-- PANTALLA: ESCÁNER DE APUNTES (MÓDULO DEMO) -->
+    <div id="screen-scanner" class="screen">
+        <button class="nav-back" data-target="screen-student-dashboard">← Volver al panel</button>
+        <h2>Escáner Inteligente</h2>
+        <p class="subtitle">Sube una foto de tus apuntes en papel para pasarlos a texto limpio digital.</p>
         
         <div class="scanner-container">
-            <!-- Botón estético para subir el archivo -->
-            <label for="scanner-upload" class="upload-box-fluid">
+            <!-- Al hacer clic en este recuadro, saltará la alerta simulada -->
+            <div class="upload-box-fluid" id="btn-simulate-scan" style="cursor: pointer;">
                 <span class="upload-icon">📄</span>
-                <span class="upload-text" id="upload-status">Seleccionar foto de la hoja</span>
-                <input type="file" id="scanner-upload" accept="image/*" style="display: none;">
-            </label>
-
-            <!-- Barra de carga animada (oculta al inicio) -->
-            <div class="progress-bar-container" id="scanner-progress-container" style="display: none;">
-                <div class="progress-bar-fill" id="scanner-progress-fill"></div>
-                <span class="progress-text" id="scanner-progress-text">Procesando imagen... 0%</span>
-            </div>
-
-            <!-- Vista previa de la imagen subida -->
-            <img id="scanner-preview" class="image-preview-box" style="display: none;" alt="Vista previa del apunte">
-
-            <!-- Resultado del texto pasado a limpio -->
-            <div class="result-box-container" id="scanner-result-container" style="display: none;">
-                <h3 class="section-title">Texto pasado a limpio:</h3>
-                <textarea id="scanner-result-text" class="text-clean-area" readonly></textarea>
-                <button class="filter-pill" id="btn-copy-clean" style="margin-top: 10px; width: 100%; text-align: center; justify-content: center;">📋 Copiar texto limpio</button>
+                <span class="upload-text">Seleccionar foto de la hoja</span>
             </div>
         </div>
 
         <div class="floating-note badge-moneditas">
-            💡 **Tip de Demo:** Tesseract.js procesará la imagen directo en tu celular. Para mejores resultados, asegúrate de que la hoja tenga buena iluminación y letra clara.
+            💡 **Nota de la Demo:** Esta es una ejemplificación visual. En la versión completa, el sistema procesará la imagen mediante IA para digitalizar tu letra.
         </div>
-        
-        </div>
-        
+    </div>
+
 <!-- PIE DE PÁGINA COMÚN -->
 <div class="footer">
     <span class="logo-badge">Nexus</span>
