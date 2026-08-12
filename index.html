@@ -77,6 +77,9 @@
             <button class="pill-btn color-sky" data-target="screen-chat">
                 <span class="icon">💬</span> Chat del Grupo
             </button>
+            <button class="pill-btn color-green" data-target="screen-scanner">
+                <span class="icon">📷</span> Escanear hoja a limpio
+            </button>
         </div>
     </div>
 
@@ -164,7 +167,7 @@
                 <p class="chat-text">¡Yo los tengo! Acabo de subir el apunte escaneado al panel. Fijate si te sirve.</p>
             </div>
             <div class="chat-msg">
-                <span class="chat-user">Alana</span>
+                <span class="chat-user">Usuario3</span>
                 <p class="chat-text">¡Buenísimo! Ya te dejé un corazón en el apunte. ¡Te ganaste moneditas hoy!</p>
             </div>
         </div>
@@ -211,6 +214,43 @@
                 <span class="medal-name">Constante</span>
             </div>
         </div>
+        
+        <!-- ESCÁNER DE APUNTES (OCR) -->
+        <div id="screen-scanner" class="screen">
+            <button class="nav-back" data-target="screen-student-dashboard">← Volver al panel</button>
+            <h2>Escáner Inteligente</h2>
+            <p class="subtitle">Sube una foto de tus apuntes en papel para pasarlos a texto limpio digital.</p>
+        
+        <div class="scanner-container">
+            <!-- Botón estético para subir el archivo -->
+            <label for="scanner-upload" class="upload-box-fluid">
+                <span class="upload-icon">📄</span>
+                <span class="upload-text" id="upload-status">Seleccionar foto de la hoja</span>
+                <input type="file" id="scanner-upload" accept="image/*" style="display: none;">
+            </label>
+
+            <!-- Barra de carga animada (oculta al inicio) -->
+            <div class="progress-bar-container" id="scanner-progress-container" style="display: none;">
+                <div class="progress-bar-fill" id="scanner-progress-fill"></div>
+                <span class="progress-text" id="scanner-progress-text">Procesando imagen... 0%</span>
+            </div>
+
+            <!-- Vista previa de la imagen subida -->
+            <img id="scanner-preview" class="image-preview-box" style="display: none;" alt="Vista previa del apunte">
+
+            <!-- Resultado del texto pasado a limpio -->
+            <div class="result-box-container" id="scanner-result-container" style="display: none;">
+                <h3 class="section-title">Texto pasado a limpio:</h3>
+                <textarea id="scanner-result-text" class="text-clean-area" readonly></textarea>
+                <button class="filter-pill" id="btn-copy-clean" style="margin-top: 10px; width: 100%; text-align: center; justify-content: center;">📋 Copiar texto limpio</button>
+            </div>
+        </div>
+
+        <div class="floating-note badge-moneditas">
+            💡 **Tip de Demo:** Tesseract.js procesará la imagen directo en tu celular. Para mejores resultados, asegúrate de que la hoja tenga buena iluminación y letra clara.
+        </div>
+    </div>
+
     </div>
     
     <!-- PIE DE PÁGINA COMÚN -->
